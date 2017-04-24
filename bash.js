@@ -16,7 +16,8 @@ process.stdin.on('data', function (data) {
   var cmd = data.toString().trim(); // remove the newline
   var args = cmd.split(" ").slice(1);
   var func = cmd.split(" ")[0];
-  methods[func](args, done);
+  if(methods[func]) methods[func](args, done);
+  else process.stderr.write('command not found: ' + cmd);
 });
 //unique
 //unique
