@@ -4,9 +4,9 @@
 var methods = require('./command.js');
 
 var done = function(output){
-  process.stdout.write(output + '\n');
-  process.stdout.write('prompt > ');
-}
+  process.stdout.write(output);
+  process.stdout.write('\nprompt > ');
+};
 
 // Output a prompt
 process.stdout.write('prompt > ');
@@ -17,10 +17,7 @@ process.stdin.on('data', function (data) {
   var args = cmd.split(" ").slice(1);
   var func = cmd.split(" ")[0];
   methods[func](args, done);
-
 });
-
-
 //unique
 //unique
 //unique

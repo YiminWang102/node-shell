@@ -1,37 +1,10 @@
 var fs = require('fs');
 var request = require('request');
-
 var obj = {
-// intToDay: function(i){
-//   var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-//   return days[i];
-// },
-//
-// intToMonth: function(i){
-//   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//   return months[i];
-// },
-//
-// processInput: function(input){
-//   var output;
-//   if(input === 'pwd'){
-//     output = process.cwd();
-//   } else if (input === 'date'){
-//     var date = new Date();
-//     var week = this.intToDay(date.getDay());
-//     var month = this.intToMonth(date.getMonth());
-//     var day = date.getDate();
-//     var year = date.getFullYear();
-//     var hours = date.getHours();
-//     var minutes = date.getMinutes();
-//     var seconds = date.getSeconds();
-//
-//     output = week + ' ' + month + ' ' + day + ' ' + year + ' ' + hours + ':' + minutes + ':' + seconds + ' ' + 'GMT-0400 (EDT)';
-//   }
-//
-//   process.stdout.write(output);
-//   process.stdout.write('\nprompt > ');
-// },
+  date: function(args, done){
+    done(Date());
+  },
+
   pwd: function(args, done){
     done(process.cwd());
   },
@@ -39,10 +12,10 @@ var obj = {
   ls: function(args, done){
     fs.readdir('.', function(err, files) {
         if (err) throw err;
-        var output = ""
+        var output = "";
         files.forEach(function(file) {
-          output += file.toString() + "\n"
-        })
+          output += file.toString() + "\n";
+        });
         done(output);
     });
   },
@@ -52,7 +25,7 @@ var obj = {
       if(ele[0] === '$'){
         return process.env[ele.slice(1)];
       } else return ele;
-    })
+    });
     done(args.join(" "));
   },
 
@@ -108,9 +81,9 @@ var obj = {
   curl: function(args, done){
     request('http://' + args[0], function(error, response, body){
       done(response.body);
-    })
+    });
   }
-}
+};
 
 
 module.exports = obj;
